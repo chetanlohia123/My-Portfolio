@@ -1,0 +1,13 @@
+/* src/pages/Home.css */
+
+.gradient-bg {
+  background: linear-gradient(to right, #1f2937, #111827); /* gray-800 to gray-900 */
+}
+
+#cursor-block {
+  will-change: transform;
+}
+
+.glow-text {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2), 0 0 15px rgba(59, 130, 246, 0.6);
+}
