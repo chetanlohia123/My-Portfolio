@@ -496,7 +496,6 @@ export default function Skills() {
       </div>
     </div>
   );
-<br></br>
   const SkillListItem = ({ skill }) => (
     <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-md border border-blue-300/20 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="flex items-center gap-4">
