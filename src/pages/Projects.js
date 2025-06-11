@@ -295,7 +295,8 @@ export default function Projects() {
           </div>
         )}
       </div><br></br><br></br>
-      <hr></hr>
+              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
+
     </section>
   );
 }

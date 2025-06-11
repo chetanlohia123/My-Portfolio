@@ -748,8 +748,8 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Footer */}
-        <br></br><br></br><br></br><hr></hr>
+        {/* Footer */}<br></br><br></br>
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
       </div>
 
       <style jsx>{`
