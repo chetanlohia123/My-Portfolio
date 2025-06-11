@@ -556,7 +556,7 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className={`text-center mb-16 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6 text-blue-400">
+          <h1 className="text-xl sm:text-6xl font-bold mb-6 text-blue-400" style={{ fontSize: '3.3rem' }}>
             Skills & Technologies
           </h1>
           <div className="w-32 h-1 bg-blue-500 mx-auto mb-6 rounded-full"></div>

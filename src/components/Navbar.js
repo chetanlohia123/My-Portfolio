@@ -76,17 +76,17 @@ export default function Navbar() {
 
       {/* Social Icons */}
       <div className="flex flex-col items-center space-y-4 mt-6">
-        <a href="#" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
-          <FaInstagram size={18} />
+        <a href="https://www.instagram.com/_chetanlohia_/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
+          <FaInstagram size={20} />
         </a>
         <a href="https://www.facebook.com/chetan.lohia.73" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
-          <FaFacebookF size={18} />
+          <FaFacebookF size={20} />
         </a>
-        <a href="#" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
-          <FaGithub size={18} />
+        <a href="https://github.com/chetanlohia123" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
+          <FaGithub size={20} />
         </a>
-        <a href="#" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
-          <FaLinkedinIn size={18} />
+        <a href="https://www.linkedin.com/in/chetan-lohia-160949337/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-500 transition-transform hover:scale-110">
+          <FaLinkedinIn size={20} />
         </a>
       </div>
     </div>
