@@ -13,9 +13,9 @@ const certifications = [
 
 export default function About() {
   const [isVisible, setIsVisible] = useState({});
-  const [ setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => { 
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
