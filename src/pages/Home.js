@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
-
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 export default function Home() {
   // Fast typewriter states
   const [nameText, setNameText] = useState('');
@@ -11,8 +10,8 @@ export default function Home() {
   const [showNameCursor, setShowNameCursor] = useState(true);
   const [showRoleCursor, setShowRoleCursor] = useState(true);
 
-  const nameWords = ['Chetan Lohia', 'चेतन लोहिया'];
-  const roleWords = ['Designer', 'Programmer', 'Problem Solver', 'Tech Enthusiast'];
+const nameWords = useMemo(() => ['Chetan Lohia', 'चेतन लोहिया'], []);
+const roleWords = useMemo(() => ['Designer', 'Programmer', 'Problem Solver', 'Tech Enthusiast'], []);
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState(0);
@@ -53,7 +52,7 @@ export default function Home() {
     return () => {
       clearTimeout(nameTimeout);
     };
-  }, [nameIndex, currentNameWord, nameText]); // Dependencies only for name typewriter
+  }, [nameIndex, currentNameWord, nameText,nameWords]);
   
   // Typewriter effect for role
   useEffect(() => {
@@ -90,7 +89,7 @@ export default function Home() {
     return () => {
       clearTimeout(roleTimeout);
     };
-  }, [roleIndex, currentRoleWord, roleText]); // Dependencies only for role typewriter
+  }, [roleIndex, currentRoleWord, roleText,roleWords]); // Dependencies only for role typewriter
 
   // Cursor blinking
   useEffect(() => {

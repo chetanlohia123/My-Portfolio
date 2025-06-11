@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaDownload,FaArrowRight } from 'react-icons/fa';
+import { FaDownload, FaArrowRight } from 'react-icons/fa';
 
 const certifications = [
   { src: '/assets/certs/1.jpeg', title: 'DBMS', color: 'from-purple-500 to-pink-500' },
@@ -11,9 +11,9 @@ const certifications = [
   { src: '/assets/certs/7.jpeg', title: 'YouTube', color: 'from-red-500 to-pink-500' }
 ];
 
+
 export default function About() {
   const [isVisible, setIsVisible] = useState({});
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,19 +35,16 @@ export default function About() {
     return () => observer.disconnect();
   }, []);
 
-  const handleMouseMove = (e) => {
-    setMousePosition({ x: e.clientX, y: e.clientY });
-  };
+  
 
   return (
     <section
-      id="about"
-      className="min-h-screen py-20 px-6 text-white relative overflow-hidden"
-      onMouseMove={handleMouseMove}
-      style={{ 
-        background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
-      }}
-    >
+  id="about"
+  className="min-h-screen py-20 px-6 text-white relative overflow-hidden"
+  style={{ 
+    background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
+  }}
+>
 
 
       <div className="max-w-7xl mx-auto relative z-10">
