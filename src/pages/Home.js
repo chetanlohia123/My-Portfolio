@@ -53,7 +53,7 @@ export default function Home() {
     return () => {
       clearTimeout(nameTimeout);
     };
-  }, [nameIndex, currentNameWord, nameText,nameWords]); // Dependencies only for name typewriter
+  }, [nameIndex, currentNameWord, nameText]); // Dependencies only for name typewriter
   
   // Typewriter effect for role
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Home() {
     return () => {
       clearTimeout(roleTimeout);
     };
-  }, [roleIndex, currentRoleWord, roleText,roleWords]); // Dependencies only for role typewriter
+  }, [roleIndex, currentRoleWord, roleText]); // Dependencies only for role typewriter
 
   // Cursor blinking
   useEffect(() => {
