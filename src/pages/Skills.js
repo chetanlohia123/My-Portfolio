@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   SiJavascript, SiPython, SiC, SiHtml5, SiReact, SiTailwindcss, SiGithub, SiNodedotjs,
-  SiAdobephotoshop, SiFigma, SiVisualstudio,
+  SiAdobephotoshop, SiFigma,
   SiCanva, SiGooglechrome,
   SiSqlite,
 } from 'react-icons/si';
@@ -408,7 +408,6 @@ export default function Skills() {
   })).filter(category => category.skills.length > 0);
 
   const totalSkills = allSkills.length;
-  const uniqueLevels = [...new Set(allSkills.map(skill => skill.level))];
 
   const SkillCard = ({ skill, skillIndex }) => (
     <div

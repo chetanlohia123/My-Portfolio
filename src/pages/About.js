@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaDownload, FaCode, FaPalette, FaGamepad, FaUsers, FaStar, FaArrowRight } from 'react-icons/fa';
+import { FaDownload,FaArrowRight } from 'react-icons/fa';
 
 const certifications = [
   { src: '/assets/certs/1.jpeg', title: 'DBMS', color: 'from-purple-500 to-pink-500' },
@@ -11,24 +11,11 @@ const certifications = [
   { src: '/assets/certs/7.jpeg', title: 'YouTube', color: 'from-red-500 to-pink-500' }
 ];
 
-const skills = [
-  { icon: FaCode, text: 'Full Stack Development', delay: 0 },
-  { icon: FaPalette, text: 'UI/UX Design', delay: 100 },
-  { icon: FaGamepad, text: 'Creative Problem Solving', delay: 200 },
-  { icon: FaUsers, text: 'Team Collaboration', delay: 300 }
-];
-
-const stats = [
-  { number: '20+', label: 'Projects Completed' },
-  { number: '7', label: 'Certifications' },
-  { number: '2+', label: 'Years Learning' }
-];
-
 export default function About() {
   const [isVisible, setIsVisible] = useState({});
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [ setMousePosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
+  useEffect(() => { 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
