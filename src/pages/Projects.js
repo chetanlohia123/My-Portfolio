@@ -56,7 +56,7 @@ const mainProjects = [
     name: 'Portfolio Showcase',
     description: 'A modern, responsive portfolio website built with React, showcasing projects and skills with interactive animations.',
     tech: ['React', 'Tailwind CSS', 'JavaScript'],
-    link: 'https://chetan-amber.vercel.app/',
+    link: 'https://chetanlohia.netlify.app/',
     github: '#',
     category: 'Web Development',
     icon: <FaUser className="text-2xl" />,
