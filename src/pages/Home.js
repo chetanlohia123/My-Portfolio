@@ -129,16 +129,17 @@ export default function Home() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between text-white overflow-hidden"
+      className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-between text-white overflow-hidden pb-20"
       style={{
         background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
         margin: 0,
         padding: 0,
-        width: '100%',
+        width: '100%'
       }}
     >
+
       {/* Mobile Layout - Interactive Object on Top */}
-      <div className="lg:hidden w-full flex justify-center items-center mb-6 z-10 px-4">
+      <div className="lg:hidden w-full flex justify-center items-start pt-8 mb-12 z-10 px-4">
         <div
           className="relative"
           style={{
@@ -147,6 +148,7 @@ export default function Home() {
             perspective: '800px',
           }}
         >
+          {/* Rest of the mobile terminal code stays the same */}
           {/* Main Terminal Container - Mobile */}
           <div
             style={{
@@ -155,10 +157,10 @@ export default function Home() {
               position: 'relative',
               transformStyle: 'preserve-3d',
               transform: `
-                rotateX(${mousePos.y * 15 + Math.sin(time * 0.8) * 2}deg) 
-                rotateY(${mousePos.x * 15 + Math.cos(time * 0.6) * 3}deg)
-                rotateZ(${Math.sin(time * 0.9) * 1}deg)
-              `,
+          rotateX(${mousePos.y * 15 + Math.sin(time * 0.8) * 2}deg) 
+          rotateY(${mousePos.x * 15 + Math.cos(time * 0.6) * 3}deg)
+          rotateZ(${Math.sin(time * 0.9) * 1}deg)
+        `,
               transition: 'transform 0.15s ease-out',
             }}
           >
@@ -172,22 +174,22 @@ export default function Home() {
                 height: '130px',
                 transform: 'translate(-50%, -50%) translateZ(40px)',
                 background: `
-                  linear-gradient(135deg, 
-                    rgba(13, 13, 13, 0.95) 0%, 
-                    rgba(26, 26, 26, 0.95) 30%,
-                    rgba(35, 35, 35, 0.9) 60%,
-                    rgba(26, 26, 26, 0.9) 100%
-                  )
-                `,
+            linear-gradient(135deg, 
+              rgba(13, 13, 13, 0.95) 0%, 
+              rgba(26, 26, 26, 0.95) 30%,
+              rgba(35, 35, 35, 0.9) 60%,
+              rgba(26, 26, 26, 0.9) 100%
+            )
+          `,
                 border: '2px solid rgba(59, 130, 246, 0.9)',
                 borderRadius: '12px',
                 backdropFilter: 'blur(20px)',
                 boxShadow: `
-                  0 0 50px rgba(59, 130, 246, 0.7),
-                  0 0 100px rgba(59, 130, 246, 0.4),
-                  inset 0 0 30px rgba(59, 130, 246, 0.15),
-                  inset 0 2px 10px rgba(255, 255, 255, 0.1)
-                `,
+            0 0 50px rgba(59, 130, 246, 0.7),
+            0 0 100px rgba(59, 130, 246, 0.4),
+            inset 0 0 30px rgba(59, 130, 246, 0.15),
+            inset 0 2px 10px rgba(255, 255, 255, 0.1)
+          `,
                 overflow: 'hidden',
                 animation: 'terminalGlow 3s ease-in-out infinite alternate',
               }}
@@ -195,12 +197,12 @@ export default function Home() {
               {/* Enhanced Terminal Header - Mobile */}
               <div style={{
                 background: `
-                  linear-gradient(90deg, 
-                    rgba(59, 130, 246, 0.3) 0%, 
-                    rgba(96, 165, 250, 0.25) 50%,
-                    rgba(59, 130, 246, 0.2) 100%
-                  )
-                `,
+            linear-gradient(90deg, 
+              rgba(59, 130, 246, 0.3) 0%, 
+              rgba(96, 165, 250, 0.25) 50%,
+              rgba(59, 130, 246, 0.2) 100%
+            )
+          `,
                 padding: '6px 12px',
                 borderBottom: '1px solid rgba(59, 130, 246, 0.4)',
                 display: 'flex',
@@ -208,31 +210,31 @@ export default function Home() {
                 gap: '6px',
                 position: 'relative',
               }}>
-                <div style={{ 
-                  width: '10px', 
-                  height: '10px', 
-                  borderRadius: '50%', 
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
                   background: '#ff5f57',
                   boxShadow: '0 0 8px rgba(255, 95, 87, 0.6)'
                 }}></div>
-                <div style={{ 
-                  width: '10px', 
-                  height: '10px', 
-                  borderRadius: '50%', 
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
                   background: '#ffbd2e',
                   boxShadow: '0 0 8px rgba(255, 189, 46, 0.6)'
                 }}></div>
-                <div style={{ 
-                  width: '10px', 
-                  height: '10px', 
-                  borderRadius: '50%', 
+                <div style={{
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
                   background: '#28ca42',
                   boxShadow: '0 0 8px rgba(40, 202, 66, 0.6)'
                 }}></div>
-                <span style={{ 
-                  marginLeft: '8px', 
-                  fontSize: '10px', 
-                  color: '#60a5fa', 
+                <span style={{
+                  marginLeft: '8px',
+                  fontSize: '10px',
+                  color: '#60a5fa',
                   fontFamily: 'monospace',
                   textShadow: '0 0 5px rgba(96, 165, 250, 0.8)'
                 }}>
@@ -241,10 +243,10 @@ export default function Home() {
               </div>
 
               {/* Enhanced Terminal Content - Mobile */}
-              <div style={{ 
-                padding: '10px', 
-                fontFamily: 'monospace', 
-                fontSize: '9px', 
+              <div style={{
+                padding: '10px',
+                fontFamily: 'monospace',
+                fontSize: '9px',
                 color: '#60a5fa',
                 background: 'rgba(0, 0, 0, 0.2)'
               }}>
@@ -260,9 +262,9 @@ export default function Home() {
                 <div style={{ color: '#10b981', textShadow: '0 0 5px #10b981' }}>
                   ✓ Ready in {Math.floor(time * 100) % 1000}ms
                 </div>
-                <div style={{ 
-                  marginTop: '4px', 
-                  color: '#8b5cf6', 
+                <div style={{
+                  marginTop: '4px',
+                  color: '#8b5cf6',
                   fontSize: '8px',
                   textShadow: '0 0 5px #8b5cf6'
                 }}>
@@ -279,12 +281,12 @@ export default function Home() {
                   right: '0',
                   bottom: '0',
                   background: `
-                    linear-gradient(45deg, 
-                      transparent 0%, 
-                      rgba(59, 130, 246, 0.05) 50%, 
-                      transparent 100%
-                    )
-                  `,
+              linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(59, 130, 246, 0.05) 50%, 
+                transparent 100%
+              )
+            `,
                   transform: `translateX(${Math.sin(time * 2) * 100}%)`,
                   opacity: 0.7,
                 }}
@@ -302,12 +304,12 @@ export default function Home() {
                   width: '30px',
                   height: '30px',
                   transform: `
-                    translate(-50%, -50%)
-                    translateX(${Math.cos(i * Math.PI / 3 + time * 0.8) * 110}px)
-                    translateY(${Math.sin(i * Math.PI / 3 + time * 0.8) * 90}px)
-                    translateZ(${Math.sin(time * 1.2 + i) * 25}px)
-                    rotateZ(${time * 20 + i * 60}deg)
-                  `,
+              translate(-50%, -50%)
+              translateX(${Math.cos(i * Math.PI / 3 + time * 0.8) * 110}px)
+              translateY(${Math.sin(i * Math.PI / 3 + time * 0.8) * 90}px)
+              translateZ(${Math.sin(time * 1.2 + i) * 25}px)
+              rotateZ(${time * 20 + i * 60}deg)
+            `,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -335,13 +337,13 @@ export default function Home() {
               width: '300px',
               height: '300px',
               background: `
-                radial-gradient(circle, 
-                  rgba(59, 130, 246, 0.4) 0%, 
-                  rgba(96, 165, 250, 0.2) 30%,
-                  rgba(16, 185, 129, 0.1) 60%,
-                  transparent 80%
-                )
-              `,
+          radial-gradient(circle, 
+            rgba(59, 130, 246, 0.4) 0%, 
+            rgba(96, 165, 250, 0.2) 30%,
+            rgba(16, 185, 129, 0.1) 60%,
+            transparent 80%
+          )
+        `,
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
               filter: 'blur(40px)',
@@ -351,16 +353,19 @@ export default function Home() {
           />
         </div>
       </div>
-
       {/* Text Content - Works for both mobile and desktop */}
       <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left z-10 px-4 lg:px-12">
         {/* Name with typewriter */}
-        <div className="relative mb-3 lg:mb-4">
+        <div className="relative mb-3 lg:mb-4" style={{ minHeight: '3.2rem' }}>
           <p
             className="font-medium tracking-widest text-gray-300"
             style={{
               fontSize: 'clamp(1.5rem, 4vw, 2.3rem)',
               textShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
+              minHeight: '1.2em', // Prevents layout shift
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center', // For mobile center
             }}
           >
             <span className="font-semibold text-white">
