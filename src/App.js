@@ -28,7 +28,7 @@ export default function App() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 pl-16">
+      <main className="flex-1 md:pl-16 ">
         <section id="home">
           <Home />
         </section>

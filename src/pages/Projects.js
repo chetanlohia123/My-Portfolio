@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaRobot, FaFilm, FaUniversity, FaBolt, FaWater, FaUser, FaCogs, FaEye, FaEyeSlash, FaAward } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaRobot, FaFilm, FaUniversity, FaBolt, FaWater, FaUser, FaCogs, FaEye, FaEyeSlash, FaAward, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const mainProjects = [
   {
@@ -114,8 +114,17 @@ const minorProjects = [
   }
 ];
 
+
 export default function Projects() {
   const [showMinorProjects, setShowMinorProjects] = useState(false);
+  const [expandedProjects, setExpandedProjects] = useState({});
+
+  const toggleProjectExpansion = (index) => {
+    setExpandedProjects(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   return (
     <section
@@ -131,7 +140,7 @@ export default function Projects() {
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             A collection of innovative solutions I've built, ranging from AI-powered applications to management systems.
-            Each project represents a unique challenge and learning experience.
+            <span className="hidden sm:inline"> Each project represents a unique challenge and learning experience.</span>
           </p>
         </div>
 
@@ -149,9 +158,18 @@ export default function Projects() {
                   <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient} transform group-hover:scale-110 transition-transform`}>
                     {project.icon}
                   </div>
-                  <span className="px-3 py-1 text-xs rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                    {project.category}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 text-xs rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                      {project.category}
+                    </span>
+                    {/* Mobile expand button */}
+                    <button
+                      onClick={() => toggleProjectExpansion(index)}
+                      className="lg:hidden p-2 rounded-lg bg-gray-800/50 text-gray-400 hover:text-white transition-colors"
+                    >
+                      {expandedProjects[index] ? <FaChevronUp size={12} /> : <FaChevronDown size={12} />}
+                    </button>
+                  </div>
                 </div>
 
                 <h3 className="text-xl font-bold mb-2 text-white group-hover:text-blue-300 transition-colors">
@@ -161,8 +179,10 @@ export default function Projects() {
                   {project.description}
                 </p>
 
-                {/* Features */}
-                <div className="mb-4">
+                {/* Features - Collapsible on mobile */}
+                <div className={`mb-4 transition-all duration-300 ${
+                  expandedProjects[index] ? 'block' : 'hidden lg:block'
+                }`}>
                   <div className="space-y-1">
                     {project.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-xs">
@@ -173,9 +193,9 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Tech Stack */}
+                {/* Tech Stack - Show fewer on mobile */}
                 <div className="flex flex-wrap gap-1 mb-6">
-                  {project.tech.slice(0, 4).map((tech, idx) => (
+                  {project.tech.slice(0, expandedProjects[index] ? project.tech.length : (window.innerWidth < 1024 ? 3 : 4)).map((tech, idx) => (
                     <span
                       key={idx}
                       className="px-2 py-1 bg-blue-500/20 text-blue-300 rounded-md text-xs border border-blue-500/30"
@@ -183,15 +203,15 @@ export default function Projects() {
                       {tech}
                     </span>
                   ))}
-                  {project.tech.length > 4 && (
+                  {!expandedProjects[index] && project.tech.length > (window.innerWidth < 1024 ? 3 : 4) && (
                     <span className="px-2 py-1 bg-gray-700 text-gray-300 rounded-md text-xs">
-                      +{project.tech.length - 4}
+                      +{project.tech.length - (window.innerWidth < 1024 ? 3 : 4)}
                     </span>
                   )}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-3">
+                {/* Action Buttons - Stack on mobile */}
+                <div className="flex flex-col sm:flex-row gap-3">
                   {project.link && (
                     <a
                       href={project.link}
@@ -250,7 +270,7 @@ export default function Projects() {
               <p className="text-gray-400">Smaller projects and learning exercises</p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {minorProjects.map((project, index) => (
                 <div
                   key={index}
@@ -295,8 +315,7 @@ export default function Projects() {
           </div>
         )}
       </div><br></br><br></br>
-              <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
-
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
     </section>
   );
 }

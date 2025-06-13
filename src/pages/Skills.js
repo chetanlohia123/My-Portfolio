@@ -5,7 +5,7 @@ import {
   SiCanva, SiGooglechrome,
   SiSqlite,
 } from 'react-icons/si';
-import { FaLaptopCode, FaUsers, FaComments, FaClock, FaLightbulb, FaProjectDiagram, FaCode, FaTerminal, FaBug, FaList, FaTh, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaLaptopCode, FaUsers, FaComments, FaClock, FaLightbulb, FaProjectDiagram, FaCode, FaTerminal, FaBug, FaList, FaTh, FaExternalLinkAlt, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa';
 
 const skillCategories = [
   {
@@ -387,11 +387,25 @@ const levelColors = {
 export default function Skills() {
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid');
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [expandedSkill, setExpandedSkill] = useState(null);
+const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); // ADD THIS LINE
 
   useEffect(() => {
     setIsVisible(true);
+
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const allSkills = skillCategories.flatMap(cat =>
@@ -409,6 +423,132 @@ export default function Skills() {
 
   const totalSkills = allSkills.length;
 
+  const toggleCategory = (categoryTitle) => {
+    setExpandedCategory(expandedCategory === categoryTitle ? null : categoryTitle);
+    setExpandedSkill(null); // Close any open skill when switching categories
+  };
+
+  const toggleSkill = (skillName) => {
+    setExpandedSkill(expandedSkill === skillName ? null : skillName);
+  };
+
+  // Mobile Skills Accordion Component
+  const MobileSkillsAccordion = () => (
+    <div className="space-y-4">
+      {filteredCategories.map((category, categoryIndex) => (
+        <div
+          key={category.title}
+          className={`transition-all duration-500 delay-${categoryIndex * 100} transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}
+        >
+          {/* Category Header */}
+          <div
+            onClick={() => toggleCategory(category.title)}
+            className="bg-gradient-to-r from-gray-800/80 to-gray-900/80 backdrop-blur-md border border-blue-300/20 rounded-xl p-4 shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{category.emoji}</span>
+                <div>
+                  <h3 className="text-lg font-bold text-blue-400">{category.title}</h3>
+                  <p className="text-xs text-gray-400">{category.skills.length} skills</p>
+                </div>
+              </div>
+              <div className="text-blue-300 transition-transform duration-300">
+                {expandedCategory === category.title ? <FaChevronUp /> : <FaChevronDown />}
+              </div>
+            </div>
+          </div>
+
+          {/* Category Skills List */}
+          {expandedCategory === category.title && (
+            <div className="mt-2 space-y-2 animate-fadeIn">
+              {category.skills.map((skill, skillIndex) => (
+                <div key={skill.name} className="ml-4">
+                  {/* Skill Header */}
+                  <div
+                    onClick={() => toggleSkill(skill.name)}
+                    className="bg-gradient-to-r from-gray-700/60 to-gray-800/60 backdrop-blur-md border border-blue-300/10 rounded-lg p-3 cursor-pointer transition-all duration-300 hover:border-blue-300/30"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="text-2xl" style={{ color: skill.color }}>
+                          {skill.icon}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-blue-300">{skill.name}</h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <div
+                              className="px-2 py-0.5 rounded-full text-xs font-medium text-white"
+                              style={{ backgroundColor: levelColors[skill.level] }}
+                            >
+                              {skill.level}
+                            </div>
+                            <span className="text-xs text-gray-400">{skill.experience}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-blue-300 transition-transform duration-300">
+                        {expandedSkill === skill.name ? <FaChevronUp /> : <FaChevronRight />}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Skill Details */}
+                  {expandedSkill === skill.name && (
+                    <div className="mt-2 ml-6 bg-gradient-to-br from-blue-900/20 to-gray-900/40 backdrop-blur-md border border-blue-300/10 rounded-lg p-4 animate-fadeIn">
+                      <div className="space-y-4">
+                        {/* Description */}
+                        <div>
+                          <p className="text-sm text-gray-300 leading-relaxed">
+                            {skill.description}
+                          </p>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div>
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-xs text-blue-300 font-medium">Proficiency</span>
+                            <span className="text-xs text-gray-400">{skill.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-700 rounded-full h-2">
+                            <div
+                              className="h-2 rounded-full transition-all duration-1000 ease-out"
+                              style={{
+                                width: `${skill.progress}%`,
+                                background: `linear-gradient(90deg, ${skill.color}80, ${skill.color})`
+                              }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Projects */}
+                        {skill.projects && skill.projects.length > 0 && (
+                          <div>
+                            <h5 className="text-xs font-semibold text-blue-300 mb-2">Related Projects:</h5>
+                            <div className="space-y-1">
+                              {skill.projects.map((project, idx) => (
+                                <div key={idx} className="flex items-center gap-2">
+                                  <FaExternalLinkAlt className="text-gray-400 text-xs flex-shrink-0" />
+                                  <span className="text-xs text-gray-300">{project}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
+  // Desktop Skill Card Component (keeping original)
   const SkillCard = ({ skill, skillIndex }) => (
     <div
       className="group relative w-full max-w-[240px] h-[300px] mx-auto perspective-1000"
@@ -495,6 +635,8 @@ export default function Skills() {
       </div>
     </div>
   );
+
+  // Desktop List Item Component (keeping original)
   const SkillListItem = ({ skill }) => (
     <div className="bg-gradient-to-r from-gray-800/60 to-gray-900/60 backdrop-blur-md border border-blue-300/20 rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="flex items-center gap-4">
@@ -549,206 +691,366 @@ export default function Skills() {
 
   return (
     <section
-      className="py-20 px-6 text-white min-h-screen"
+      className="py-12 md:py-20 px-4 md:px-6 text-white min-h-screen"
       style={{ background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)' }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className={`text-center mb-16 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-xl sm:text-6xl font-bold mb-6 text-blue-400" style={{ fontSize: '3.3rem' }}>
+        <div className={`text-center mb-12 md:mb-16 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 text-blue-400" style={{ fontSize: isMobile ? '2rem' : '3.3rem' }}>
             Skills & Technologies
           </h1>
-          <div className="w-32 h-1 bg-blue-500 mx-auto mb-6 rounded-full"></div>
-          <p className="text-gray-300 text-lg sm:text-xl max-w-4xl mx-auto leading-relaxed mb-8">
+          <div className="w-20 md:w-32 h-1 bg-blue-500 mx-auto mb-4 md:mb-6 rounded-full"></div>
+          <p className="text-gray-300 text-sm md:text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed mb-6 md:mb-8 px-2">
             A comprehensive showcase of my technical expertise and professional capabilities
           </p>
-
-          
         </div>
 
-        {/* Controls Section */}
-{/* Controls Section */}
-<div className={`max-w-6xl mx-auto mb-16 transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-  <div className="bg-gray-800/60 backdrop-blur-md rounded-xl p-6 border border-blue-300/20 shadow-xl">
-    
-    {/* Stats Section - Removed */}
+        {/* Controls Section - Only show on desktop */}
+        {!isMobile && (
+          <div className={`max-w-6xl mx-auto mb-16 transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className="bg-gray-800/60 backdrop-blur-md rounded-xl p-6 border border-blue-300/20 shadow-xl">
+              {/* Filters and View Toggle */}
+              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
 
-    {/* Filters and View Toggle */}
-    <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-      
-      {/* Filter Controls */}
-      <div className="flex flex-col sm:flex-row gap-4 flex-1">
-        
-        {/* Level Filter */}
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-gray-400 font-medium">Filter by Level</label>
-          <select
-            value={selectedLevel}
-            onChange={(e) => setSelectedLevel(e.target.value)}
-            className="bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300 min-w-[140px]"
-          >
-            <option value="All">All Levels</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-            <option value="Expert">Expert</option>
-          </select>
-        </div>
+                {/* Filter Controls */}
+                <div className="flex flex-col sm:flex-row gap-4 flex-1">
 
-        {/* Category Filter */}
-        <div className="flex flex-col gap-1">
-          <label className="text-xs text-gray-400 font-medium">Filter by Category</label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300 min-w-[180px]"
-          >
-            <option value="All">All Categories</option>
-            {skillCategories.map(cat => (
-              <option key={cat.title} value={cat.title}>{cat.title}</option>
-            ))}
-          </select>
-        </div>
+                  {/* Level Filter */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs text-gray-400 font-medium">Filter by Level</label>
+                    <select
+                      value={selectedLevel}
+                      onChange={(e) => setSelectedLevel(e.target.value)}
+                      className="bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300 min-w-[140px]"
+                    >
+                      <option value="All">All Levels</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Expert">Expert</option>
+                    </select>
+                  </div>
 
-        {/* Reset Filters Button */}
-        {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-transparent font-medium">Reset</label>
-            <button
-              onClick={() => {
-                setSelectedLevel('All');
-                setSelectedCategory('All');
-              }}
-              className="bg-red-600/20 hover:bg-red-600/40 border border-red-400/20 hover:border-red-400/40 rounded-xl px-4 py-2 text-red-300 hover:text-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer transition-all duration-300 text-sm"
-            >
-              Clear Filters
-            </button>
-          </div>
-        )}
-      </div>
+                  {/* Category Filter */}
+                  <div className="flex flex-col gap-1">
+                    <label className="text-xs text-gray-400 font-medium">Filter by Category</label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300 min-w-[180px]"
+                    >
+                      <option value="All">All Categories</option>
+                      {skillCategories.map(cat => (
+                        <option key={cat.title} value={cat.title}>{cat.title}</option>
+                      ))}
+                    </select>
+                  </div>
 
-      {/* Skill Count Display */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
-        <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-4 py-2 border border-blue-300/20 text-center">
-          <div className="text-lg font-bold text-blue-400">
-            {(selectedLevel !== 'All' || selectedCategory !== 'All') 
-              ? filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)
-              : totalSkills
-            }
-          </div>
-          <div className="text-xs text-gray-300">
-            {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Filtered Skills' : 'Total Skills'}
-          </div>
-        </div>
-
-        <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-4 py-2 border border-blue-300/20 text-center">
-          <div className="text-lg font-bold text-blue-400">
-            {(selectedLevel !== 'All' || selectedCategory !== 'All') 
-              ? filteredCategories.length
-              : skillCategories.length
-            }
-          </div>
-          <div className="text-xs text-gray-300">
-            {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Active Categories' : 'Total Categories'}
-          </div>
-        </div>
-      </div>
-
-      {/* View Mode Toggle */}
-      <div className="flex flex-col gap-1">
-        <label className="text-xs text-gray-400 font-medium text-center">View Mode</label>
-        <div className="flex items-center gap-1 bg-gray-700/60 rounded-xl p-1 border border-blue-300/20">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`p-2 rounded-lg transition-all duration-300 ${
-              viewMode === 'grid'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
-            }`}
-            title="Grid View"
-          >
-            <FaTh className="text-sm" />
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`p-2 rounded-lg transition-all duration-300 ${
-              viewMode === 'list'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
-            }`}
-            title="List View"
-          >
-            <FaList className="text-sm" />
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Active Filters Display */}
-    {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
-      <div className="mt-4 pt-4 border-t border-gray-600/30">
-        <div className="flex items-center gap-2 text-sm">
-          <span className="text-gray-400">Active filters:</span>
-          {selectedLevel !== 'All' && (
-            <span className="bg-blue-600/20 text-blue-300 px-2 py-1 rounded-md text-xs border border-blue-400/20">
-              Level: {selectedLevel}
-            </span>
-          )}
-          {selectedCategory !== 'All' && (
-            <span className="bg-green-600/20 text-green-300 px-2 py-1 rounded-md text-xs border border-green-400/20">
-              Category: {selectedCategory}
-            </span>
-          )}
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-
-        {/* Skills Display */}
-        <div className="space-y-10">
-          {filteredCategories.map((category, categoryIndex) => (
-            <div
-              key={category.title}
-              className={`transition-all duration-1000 delay-${(categoryIndex + 1) * 100} transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-                }`}
-            >
-              {/* Category Header */}
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-4 mb-4">
-                  <span className="text-5xl">{category.emoji}</span>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-blue-400">
-                    {category.title}
-                  </h2>
+                  {/* Reset Filters Button */}
+                  {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
+                    <div className="flex flex-col gap-1">
+                      <label className="text-xs text-transparent font-medium">Reset</label>
+                      <button
+                        onClick={() => {
+                          setSelectedLevel('All');
+                          setSelectedCategory('All');
+                        }}
+                        className="bg-red-600/20 hover:bg-red-600/40 border border-red-400/20 hover:border-red-400/40 rounded-xl px-4 py-2 text-red-300 hover:text-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer transition-all duration-300 text-sm"
+                      >
+                        Clear Filters
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-2">
-                  {category.description}
-                </p>
-                <div className="text-sm text-gray-400">
-                  {category.skills.length} skill{category.skills.length !== 1 ? 's' : ''}
+
+                {/* Skill Count Display */}
+                <div className="flex flex-col sm:flex-row gap-4 items-center">
+                  <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-4 py-2 border border-blue-300/20 text-center">
+                    <div className="text-lg font-bold text-blue-400">
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All')
+                        ? filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)
+                        : totalSkills
+                      }
+                    </div>
+                    <div className="text-xs text-gray-300">
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Filtered Skills' : 'Total Skills'}
+                    </div>
+                  </div>
+
+                  <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-4 py-2 border border-blue-300/20 text-center">
+                    <div className="text-lg font-bold text-blue-400">
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All')
+                        ? filteredCategories.length
+                        : skillCategories.length
+                      }
+                    </div>
+                    <div className="text-xs text-gray-300">
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Active Categories' : 'Total Categories'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* View Mode Toggle */}
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs text-gray-400 font-medium text-center">View Mode</label>
+                  <div className="flex items-center gap-1 bg-gray-700/60 rounded-xl p-1 border border-blue-300/20">
+                    <button
+                      onClick={() => setViewMode('grid')}
+                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'grid'
+                          ? 'bg-blue-600 text-white shadow-md'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
+                        }`}
+                      title="Grid View"
+                    >
+                      <FaTh className="text-sm" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'list'
+                          ? 'bg-blue-600 text-white shadow-md'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
+                        }`}
+                      title="List View"
+                    >
+                      <FaList className="text-sm" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Skills Grid/List */}
-              {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 justify-items-center">
-                  {category.skills.map((skill, skillIndex) => (
-                    <SkillCard key={skill.name} skill={skill} skillIndex={skillIndex} />
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4 max-w-4xl mx-auto">
-                  {category.skills.map((skill) => (
-                    <SkillListItem key={skill.name} skill={skill} />
-                  ))}
+              {/* Active Filters Display */}
+              {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
+                <div className="mt-4 pt-4 border-t border-gray-600/30">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="text-gray-400">Active filters:</span>
+                    {selectedLevel !== 'All' && (
+                      <span className="bg-blue-600/20 text-blue-300 px-2 py-1 rounded-md text-xs border border-blue-400/20">
+                        Level: {selectedLevel}
+                      </span>
+                    )}
+                    {selectedCategory !== 'All' && (
+                      <span className="bg-green-600/20 text-green-300 px-2 py-1 rounded-md text-xs border border-green-400/20">
+                        Category: {selectedCategory}
+                      </span>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
-          ))}
+          </div>
+        )}
+
+        {/* Mobile Quick Stats */}
+        {/* Mobile Quick Stats - Only show when no filters are active */}
+        {isMobile && selectedLevel === 'All' && selectedCategory === 'All' && (
+          <div className={`mb-8 transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className="bg-gray-800/60 backdrop-blur-md rounded-xl p-4 border border-blue-300/20 shadow-xl">
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div>
+                  <div className="text-xl font-bold text-blue-400">{totalSkills}</div>
+                  <div className="text-xs text-gray-300">Total Skills</div>
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-blue-400">{skillCategories.length}</div>
+                  <div className="text-xs text-gray-300">Categories</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Mobile Filters */}
+        {isMobile && (
+          <div className={`mb-8 transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+            <div className="bg-gray-800/60 backdrop-blur-md rounded-xl border border-blue-300/20 shadow-xl overflow-hidden">
+              
+              {/* Filter Header with Toggle Button */}
+              <div 
+                onClick={() => setIsMobileFiltersExpanded(!isMobileFiltersExpanded)}
+                className="p-4 cursor-pointer transition-all duration-300 hover:bg-gray-700/30"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-blue-300">Filters</h3>
+                    {/* Active Filter Indicators */}
+                    {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
+                      <div className="flex gap-1">
+                        {selectedLevel !== 'All' && (
+                          <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                        )}
+                        {selectedCategory !== 'All' && (
+                          <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {/* Filter Count */}
+                    <div className="text-xs text-gray-400">
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                        ? `${filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)} skills`
+                        : `${totalSkills} skills`
+                      }
+                    </div>
+                    {/* Expand/Collapse Icon */}
+                    <div className={`text-blue-300 transition-transform duration-300 ${isMobileFiltersExpanded ? 'rotate-180' : 'rotate-0'}`}>
+                      <FaChevronDown />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Collapsible Filter Content */}
+              <div className={`transition-all duration-500 ease-in-out ${
+                isMobileFiltersExpanded 
+                  ? 'max-h-96 opacity-100' 
+                  : 'max-h-0 opacity-0'
+              } overflow-hidden`}>
+                <div className="px-4 pb-4 space-y-4 border-t border-gray-600/30">
+                  {/* Level Filter */}
+                  <div className="pt-4">
+                    <label className="text-xs text-gray-400 font-medium block mb-2">Filter by Level</label>
+                    <select
+                      value={selectedLevel}
+                      onChange={(e) => setSelectedLevel(e.target.value)}
+                      className="w-full bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300"
+                    >
+                      <option value="All">All Levels</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Expert">Expert</option>
+                    </select>
+                  </div>
+
+                  {/* Category Filter */}
+                  <div>
+                    <label className="text-xs text-gray-400 font-medium block mb-2">Filter by Category</label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="w-full bg-gray-700/60 border border-blue-300/20 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer transition-all duration-300"
+                    >
+                      <option value="All">All Categories</option>
+                      {skillCategories.map(cat => (
+                        <option key={cat.title} value={cat.title}>{cat.title}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Stats Row */}
+                  <div className="grid grid-cols-2 gap-4 pt-2">
+                    <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-3 py-2 border border-blue-300/20 text-center">
+                      <div className="text-lg font-bold text-blue-400">
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                          ? filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)
+                          : totalSkills
+                        }
+                      </div>
+                      <div className="text-xs text-gray-300">
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Filtered' : 'Total'} Skills
+                      </div>
+                    </div>
+                    <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-3 py-2 border border-blue-300/20 text-center">
+                      <div className="text-lg font-bold text-blue-400">
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                          ? filteredCategories.length
+                          : skillCategories.length
+                        }
+                      </div>
+                      <div className="text-xs text-gray-300">
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All') ? 'Active' : 'Total'} Categories
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Clear Filters Button */}
+                  {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent collapse when clicking clear button
+                        setSelectedLevel('All');
+                        setSelectedCategory('All');
+                      }}
+                      className="w-full bg-red-600/20 hover:bg-red-600/40 border border-red-400/20 hover:border-red-400/40 rounded-xl px-4 py-3 text-red-300 hover:text-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer transition-all duration-300 text-sm font-medium"
+                    >
+                      Clear All Filters
+                    </button>
+                  )}
+
+                  {/* Active Filters Display */}
+                  {(selectedLevel !== 'All' || selectedCategory !== 'All') && (
+                    <div className="pt-2 border-t border-gray-600/30">
+                      <div className="flex flex-wrap gap-2">
+                        <span className="text-xs text-gray-400">Active:</span>
+                        {selectedLevel !== 'All' && (
+                          <span className="bg-blue-600/20 text-blue-300 px-2 py-1 rounded-md text-xs border border-blue-400/20">
+                            {selectedLevel}
+                          </span>
+                        )}
+                        {selectedCategory !== 'All' && (
+                          <span className="bg-green-600/20 text-green-300 px-2 py-1 rounded-md text-xs border border-green-400/20">
+                            {selectedCategory}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Skills Display */}
+        <div className="space-y-10">
+          {isMobile ? (
+            <MobileSkillsAccordion />
+          ) : (
+            filteredCategories.map((category, categoryIndex) => (
+              <div
+                key={category.title}
+                className={`transition-all duration-1000 delay-${(categoryIndex + 1) * 100} transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  }`}
+              >
+                {/* Category Header */}
+                <div className="text-center mb-12">
+                  <div className="inline-flex items-center gap-4 mb-4">
+                    <span className="text-5xl">{category.emoji}</span>
+                    <h2 className="text-3xl lg:text-4xl font-bold text-blue-400">
+                      {category.title}
+                    </h2>
+                  </div>
+                  <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-2">
+                    {category.description}
+                  </p>
+                  <div className="text-sm text-gray-400">
+                    {category.skills.length} skill{category.skills.length !== 1 ? 's' : ''}
+                  </div>
+                </div>
+
+                {/* Skills Grid/List */}
+                {viewMode === 'grid' ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 justify-items-center">
+                    {category.skills.map((skill, skillIndex) => (
+                      <SkillCard key={skill.name} skill={skill} skillIndex={skillIndex} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="space-y-4 max-w-4xl mx-auto">
+                    {category.skills.map((skill) => (
+                      <SkillListItem key={skill.name} skill={skill} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))
+          )}
         </div>
 
-        {/* Footer */}<br></br><br></br>
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
+        {/* Footer */}
+        <div className="mt-16">
+          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent" />
+        </div>
       </div>
 
       <style jsx>{`
@@ -770,6 +1072,21 @@ export default function Skills() {
 
         .skill-card:hover {
           transform: rotateY(180deg);
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
         }
       `}</style>
     </section>

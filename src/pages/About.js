@@ -11,9 +11,9 @@ const certifications = [
   { src: '/assets/certs/7.jpeg', title: 'YouTube', color: 'from-red-500 to-pink-500' }
 ];
 
-
 export default function About() {
   const [isVisible, setIsVisible] = useState({});
+  const [currentCertIndex, setCurrentCertIndex] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,18 +35,22 @@ export default function About() {
     return () => observer.disconnect();
   }, []);
 
-  
+  // Certificate rotation for mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCertIndex((prev) => (prev + 1) % certifications.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
-  id="about"
-  className="min-h-screen py-20 px-6 text-white relative overflow-hidden"
-  style={{ 
-    background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
-  }}
->
-
-
+      id="about"
+      className="min-h-screen py-20 px-6 text-white relative overflow-hidden"
+      style={{ 
+        background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
+      }}
+    >
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Hero Section */}
         <div 
@@ -101,9 +105,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Stats Section */}
-        
-
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mb-16" />
 
         {/* Certifications Section */}
@@ -121,7 +122,8 @@ export default function About() {
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full" />
           </div>
 
-          <div className="overflow-hidden relative rounded-2xl">
+          {/* Desktop Version - Scrolling */}
+          <div className="overflow-hidden relative rounded-2xl desktop-certs">
             <div className="flex animate-scroll-x space-x-8 w-max py-8">
               {[...certifications, ...certifications].map((cert, idx) => (
                 <div
@@ -140,7 +142,33 @@ export default function About() {
               ))}
             </div>
           </div>
-        
+
+          {/* Mobile Version - Single Certificate with Slide Animation */}
+          <div className="mobile-certs flex justify-center">
+            <div className="relative group cursor-pointer">
+              <div className={`absolute -inset-2 bg-gradient-to-r ${certifications[currentCertIndex].color} rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-md`} />
+              <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-xl p-2 border border-gray-700/50 group-hover:border-gray-500/50 transition-all duration-500">
+                <img
+                  key={currentCertIndex}
+                  src={certifications[currentCertIndex].src}
+                  alt={certifications[currentCertIndex].title}
+                  className="h-[300px] w-auto rounded-lg object-contain transform group-hover:scale-105 transition-all duration-500 animate-slide-in"
+                />
+              </div>
+              <div className="text-center mt-4">
+                <div className="flex justify-center mt-2 space-x-1">
+                  {certifications.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        idx === currentCertIndex ? 'bg-blue-500' : 'bg-gray-600'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mb-16" />
@@ -169,8 +197,7 @@ export default function About() {
             Check it Out
           </a>
         </div><br></br><br></br>
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
-
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent " />
       </div>
 
       {/* Enhanced Animations */}
@@ -180,8 +207,37 @@ export default function About() {
           100% { transform: translateX(-50%); }
         }
         
+        @keyframes slide-in {
+          0% { transform: translateX(100px); opacity: 0; }
+          100% { transform: translateX(0); opacity: 1; }
+        }
+        
         .animate-scroll-x {
           animation: scroll-x 20s linear infinite;
+        }
+        
+        .animate-slide-in {
+          animation: slide-in 0.5s ease-out;
+        }
+
+        /* Responsive layout without scaling */
+        @media (max-width: 1024px) {
+          .desktop-certs {
+            display: none;
+          }
+          .mobile-certs {
+            display: flex;
+          }
+        }
+
+        /* Hide mobile certs on desktop */
+        @media (min-width: 1025px) {
+          .mobile-certs {
+            display: none;
+          }
+          .desktop-certs {
+            display: block;
+          }
         }
       `}</style>
     </section>

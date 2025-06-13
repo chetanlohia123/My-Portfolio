@@ -20,7 +20,7 @@ export default function Contact() {
 
   const contactInfo = [
     {
-      icon: <FaEnvelope className="text-2xl" />,
+      icon: <FaEnvelope className="text-xl sm:text-2xl" />,
       label: 'Email',
       value: 'official.clohia@gmail.com',
       link: 'mailto:official.clohia@gmail.com',
@@ -28,7 +28,7 @@ export default function Contact() {
       delay: '0ms'
     },
     {
-      icon: <FaPhone className="text-2xl" />,
+      icon: <FaPhone className="text-xl sm:text-2xl" />,
       label: 'Phone',
       value: '+91 95473 77980, +977 98633 30302',
       link: 'tel:+919547377980,+9779863330302',
@@ -36,7 +36,7 @@ export default function Contact() {
       delay: '200ms'
     },
     {
-      icon: <FaMapMarkerAlt className="text-2xl" />,
+      icon: <FaMapMarkerAlt className="text-xl sm:text-2xl" />,
       label: 'Location',
       value: 'Kathmandu, Nepal',
       link: 'https://maps.google.com/?q=Kathmandu,Nepal',
@@ -47,25 +47,25 @@ export default function Contact() {
 
   const socialLinks = [
     {
-      icon: <FaGithub className="text-2xl" />,
+      icon: <FaGithub className="text-lg sm:text-xl" />,
       label: 'GitHub',
       link: 'https://github.com/chetanlohia123',
       gradient: 'from-gray-600 to-gray-800'
     },
     {
-      icon: <FaLinkedin className="text-2xl" />,
+      icon: <FaLinkedin className="text-lg sm:text-xl" />,
       label: 'LinkedIn',
       link: 'https://www.linkedin.com/in/chetan-lohia-160949337/',
       gradient: 'from-blue-600 to-blue-800'
     },
     {
-      icon: <FaFacebook className="text-2xl" />,
+      icon: <FaFacebook className="text-lg sm:text-xl" />,
       label: 'Facebook',
       link: 'https://www.facebook.com/chetan.lohia.73',
       gradient: 'from-blue-400 to-blue-600'
     },
     {
-      icon: <FaInstagram className="text-2xl" />,
+      icon: <FaInstagram className="text-lg sm:text-xl" />,
       label: 'Instagram',
       link: 'https://www.instagram.com/_chetanlohia_/',
       gradient: 'from-pink-500 to-purple-600'
@@ -114,39 +114,39 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="min-h-screen py-20 px-6 text-white relative"
+      className="min-h-screen py-10 sm:py-16 lg:py-20 px-3 sm:px-6 text-white relative"
       style={{ background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)' }}
     >
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
-          <h2 style={{ fontSize: '3.3rem' }} className="text-xl md:text-7xl font-bold mb-8 leading-tight">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight px-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 animate-gradient">
               Get In Touch
             </span>
           </h2>
           
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
             Ready to bring your ideas to life? Let's collaborate and create something extraordinary together. 
             Every great project starts with a simple conversation.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="mb-12">
-              <h3 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+          <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+            <div className="mb-8 lg:mb-12">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 lg:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 Let's Start Something Amazing
               </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
+              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
                 I'm passionate about turning innovative ideas into reality. Whether you have a project in mind, 
                 need technical expertise, or just want to discuss possibilities, I'm here to help make it happen.
               </p>
             </div>
 
             {/* Contact Info Cards */}
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
@@ -157,21 +157,21 @@ export default function Contact() {
                     href={info.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-6 p-6 bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-blue-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/20"
+                    className="flex items-center gap-3 sm:gap-4 lg:gap-6 p-4 sm:p-5 lg:p-6 bg-gray-900/40 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-gray-700/30 hover:border-blue-500/50 transition-all duration-500 transform hover:-translate-y-1 lg:hover:-translate-y-2 hover:shadow-xl lg:hover:shadow-2xl hover:shadow-blue-500/20"
                   >
-                    <div className={`p-4 rounded-xl bg-gradient-to-r ${info.gradient} group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                    <div className={`p-3 lg:p-4 rounded-lg lg:rounded-xl bg-gradient-to-r ${info.gradient} group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0`}>
                       {info.icon}
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-white text-lg group-hover:text-blue-300 transition-colors duration-300">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-white text-base sm:text-lg group-hover:text-blue-300 transition-colors duration-300">
                         {info.label}
                       </h4>
-                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 text-base">
+                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 text-sm sm:text-base break-words">
                         {info.value}
                       </p>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <FaRocket className="text-blue-400" />
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0">
+                      <FaRocket className="text-blue-400 text-sm sm:text-base" />
                     </div>
                   </a>
                 </div>
@@ -179,23 +179,23 @@ export default function Contact() {
             </div>
 
             {/* Social Media Links */}
-            <div className="mt-12">
-              <h4 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            <div className="mt-8 lg:mt-12">
+              <h4 className="text-xl sm:text-2xl font-bold mb-4 lg:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                 Connect With Me
               </h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
                 {socialLinks.map((social, index) => (
                   <a
                     key={index}
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-4 p-4 bg-gray-900/40 backdrop-blur-sm rounded-xl border border-gray-700/30 hover:border-blue-500/50 transition-all duration-300 transform hover:scale-105"
+                    className="group flex items-center gap-3 lg:gap-4 p-3 lg:p-4 bg-gray-900/40 backdrop-blur-sm rounded-lg lg:rounded-xl border border-gray-700/30 hover:border-blue-500/50 transition-all duration-300 transform hover:scale-105"
                   >
-                    <div className={`p-3 rounded-lg bg-gradient-to-r ${social.gradient} group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`p-2 lg:p-3 rounded-md lg:rounded-lg bg-gradient-to-r ${social.gradient} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                       {social.icon}
                     </div>
-                    <span className="font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
+                    <span className="font-semibold text-white group-hover:text-blue-300 transition-colors duration-300 text-sm sm:text-base">
                       {social.label}
                     </span>
                   </a>
@@ -204,41 +204,41 @@ export default function Contact() {
             </div>
 
             {/* Availability Status */}
-            <div className="p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded-2xl border border-green-500/20 mt-8">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="relative">
-                  <div className="w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
-                  <div className="absolute inset-0 w-4 h-4 bg-green-400 rounded-full animate-ping opacity-75"></div>
+            <div className="p-4 sm:p-5 lg:p-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-green-500/20 mt-6 lg:mt-8">
+              <div className="flex items-center gap-3 mb-2 lg:mb-3">
+                <div className="relative flex-shrink-0">
+                  <div className="w-3 h-3 lg:w-4 lg:h-4 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 w-3 h-3 lg:w-4 lg:h-4 bg-green-400 rounded-full animate-ping opacity-75"></div>
                 </div>
-                <h4 className="font-semibold text-green-400 text-lg">Available for New Projects</h4>
+                <h4 className="font-semibold text-green-400 text-base sm:text-lg">Available for New Projects</h4>
               </div>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm sm:text-base">
                 Currently accepting new opportunities and collaborations. 
-                <span className="text-green-400 font-medium"> Response time: 24-48 hours</span>
+                <span className="text-green-400 font-medium block sm:inline"> Response time: 24-48 hours</span>
               </p>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="relative">
-            <div className="form-container bg-gray-900/40 backdrop-blur-lg rounded-3xl p-8 border border-gray-700/30 shadow-2xl">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-lg">
-                  <FaPaperPlane className="text-white text-xl" />
+          <div className="relative order-1 lg:order-2">
+            <div className="form-container bg-gray-900/40 backdrop-blur-lg rounded-2xl lg:rounded-3xl p-6 sm:p-7 lg:p-8 border border-gray-700/30 shadow-2xl">
+              <div className="flex items-center gap-3 lg:gap-4 mb-6 lg:mb-8">
+                <div className="p-2 lg:p-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-lg flex-shrink-0">
+                  <FaPaperPlane className="text-white text-lg lg:text-xl" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Send a Message</h3>
-                  <p className="text-gray-400">Let's discuss your project</p>
+                  <h3 className="text-xl lg:text-2xl font-bold text-white">Send a Message</h3>
+                  <p className="text-gray-400 text-sm lg:text-base">Let's discuss your project</p>
                 </div>
               </div>
 
-              <div ref={form} className="space-y-6">
+              <div ref={form} className="space-y-5 lg:space-y-6">
                 {/* Name Input */}
                 <div className="relative group">
-                  <div className={`flex items-center gap-4 p-4 bg-gray-800/60 backdrop-blur-sm rounded-xl border-2 transition-all duration-300 ${
+                  <div className={`flex items-center gap-3 lg:gap-4 p-3 lg:p-4 bg-gray-800/60 backdrop-blur-sm rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${
                     focusedField === 'name' ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-700/30 group-hover:border-gray-600/50'
                   }`}>
-                    <FaUser className={`transition-colors duration-300 ${focusedField === 'name' ? 'text-blue-400' : 'text-gray-400 group-hover:text-gray-300'}`} />
+                    <FaUser className={`transition-colors duration-300 flex-shrink-0 ${focusedField === 'name' ? 'text-blue-400' : 'text-gray-400 group-hover:text-gray-300'}`} />
                     <input
                       type="text"
                       name="user_name"
@@ -248,17 +248,17 @@ export default function Contact() {
                       onFocus={() => setFocusedField('name')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-lg"
+                      className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-base lg:text-lg min-w-0"
                     />
                   </div>
                 </div>
 
                 {/* Email Input */}
                 <div className="relative group">
-                  <div className={`flex items-center gap-4 p-4 bg-gray-800/60 backdrop-blur-sm rounded-xl border-2 transition-all duration-300 ${
+                  <div className={`flex items-center gap-3 lg:gap-4 p-3 lg:p-4 bg-gray-800/60 backdrop-blur-sm rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${
                     focusedField === 'email' ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-700/30 group-hover:border-gray-600/50'
                   }`}>
-                    <FaEnvelope className={`transition-colors duration-300 ${focusedField === 'email' ? 'text-blue-400' : 'text-gray-400 group-hover:text-gray-300'}`} />
+                    <FaEnvelope className={`transition-colors duration-300 flex-shrink-0 ${focusedField === 'email' ? 'text-blue-400' : 'text-gray-400 group-hover:text-gray-300'}`} />
                     <input
                       type="email"
                       name="user_email"
@@ -268,26 +268,26 @@ export default function Contact() {
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-lg"
+                      className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-base lg:text-lg min-w-0"
                     />
                   </div>
                 </div>
 
                 {/* Message Input */}
                 <div className="relative group">
-                  <div className={`p-4 bg-gray-800/60 backdrop-blur-sm rounded-xl border-2 transition-all duration-300 ${
+                  <div className={`p-3 lg:p-4 bg-gray-800/60 backdrop-blur-sm rounded-lg lg:rounded-xl border-2 transition-all duration-300 ${
                     focusedField === 'message' ? 'border-blue-500 shadow-lg shadow-blue-500/20' : 'border-gray-700/30 group-hover:border-gray-600/50'
                   }`}>
                     <textarea
                       name="message"
                       placeholder="Tell me about your project or idea..."
-                      rows="6"
+                      rows="5"
                       value={formData.message}
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField(null)}
                       required
-                      className="w-full bg-transparent text-white placeholder-gray-400 outline-none resize-none text-lg leading-relaxed"
+                      className="w-full bg-transparent text-white placeholder-gray-400 outline-none resize-none text-base lg:text-lg leading-relaxed"
                     />
                   </div>
                 </div>
@@ -296,7 +296,7 @@ export default function Contact() {
                 <button
                   onClick={sendEmail}
                   disabled={isSubmitting}
-                  className={`group w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] ${
+                  className={`group w-full py-3 lg:py-4 px-5 lg:px-6 rounded-lg lg:rounded-xl font-semibold text-base lg:text-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] ${
                     isSubmitting
                       ? 'bg-gray-600 cursor-not-allowed'
                       : 'bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 hover:from-blue-700 hover:via-purple-700 hover:to-blue-700 hover:shadow-xl hover:shadow-blue-500/30 bg-size-200 hover:bg-pos-100'
@@ -306,7 +306,8 @@ export default function Contact() {
                   {isSubmitting ? (
                     <>
                       <FaSpinner className="animate-spin" />
-                      Sending Message...
+                      <span className="hidden sm:inline">Sending Message...</span>
+                      <span className="sm:hidden">Sending...</span>
                     </>
                   ) : (
                     <>
@@ -318,19 +319,19 @@ export default function Contact() {
 
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
-                  <div className="flex items-center gap-3 p-4 bg-green-500/20 border border-green-500/30 rounded-xl text-green-400 animate-slide-up">
-                    <FaCheckCircle className="text-xl animate-bounce" />
+                  <div className="flex items-start gap-3 p-4 bg-green-500/20 border border-green-500/30 rounded-lg lg:rounded-xl text-green-400 animate-slide-up">
+                    <FaCheckCircle className="text-lg lg:text-xl animate-bounce flex-shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-semibold">Message sent successfully!</div>
-                      <div className="text-sm text-green-300">You'll receive a confirmation email shortly. I'll get back to you within 24-48 hours.</div>
+                      <div className="font-semibold text-sm sm:text-base">Message sent successfully!</div>
+                      <div className="text-xs sm:text-sm text-green-300 mt-1">You'll receive a confirmation email shortly. I'll get back to you within 24-48 hours.</div>
                     </div>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
-                  <div className="flex items-center gap-3 p-4 bg-red-500/20 border border-red-500/30 rounded-xl text-red-400 animate-slide-up">
-                    <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
-                    <span>Oops! Something went wrong. Please try again or contact me directly.</span>
+                  <div className="flex items-start gap-3 p-4 bg-red-500/20 border border-red-500/30 rounded-lg lg:rounded-xl text-red-400 animate-slide-up">
+                    <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse flex-shrink-0 mt-2"></div>
+                    <span className="text-sm sm:text-base">Oops! Something went wrong. Please try again or contact me directly.</span>
                   </div>
                 )}
               </div>
@@ -367,7 +368,13 @@ export default function Contact() {
         }
         
         .contact-card:hover {
-          transform: translateY(-8px);
+          transform: translateY(-4px);
+        }
+        
+        @media (min-width: 1024px) {
+          .contact-card:hover {
+            transform: translateY(-8px);
+          }
         }
         
         .form-container {
@@ -381,6 +388,13 @@ export default function Contact() {
         
         .bg-pos-100 {
           background-position: 100% 0;
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 640px) {
+          .min-w-0 {
+            min-width: 0;
+          }
         }
       `}</style>
     </section>
