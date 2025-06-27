@@ -189,7 +189,7 @@ export default function About() {
           </p>
           
           <a
-            href={process.env.PUBLIC_URL + '/assets/RESUME.pdf'}
+            href={process.env.PUBLIC_URL + '/assets/resume.pdf'}
             download
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-all"
           >
