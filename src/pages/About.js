@@ -8,7 +8,10 @@ const certifications = [
   { src: '/assets/certs/4.jpeg', title: 'Makathon', color: 'from-orange-500 to-red-500' },
   { src: '/assets/certs/5.jpeg', title: 'Python Programming', color: 'from-yellow-500 to-orange-500' },
   { src: '/assets/certs/6.jpeg', title: 'Hackathon', color: 'from-indigo-500 to-purple-500' },
-  { src: '/assets/certs/7.jpeg', title: 'YouTube', color: 'from-red-500 to-pink-500' }
+  { src: '/assets/certs/7.jpeg', title: 'YouTube', color: 'from-red-500 to-pink-500' },
+  { src: '/assets/certs/8.jpg', title: 'AWS Traning', color: 'from-red-500 to-pink-500' },
+  { src: '/assets/certs/9.jpg', title: 'AWS Job Simulation', color: 'from-red-500 to-pink-500' },
+  { src: '/assets/certs/10.jpg', title: 'Deloitte Job Simulation', color: 'from-red-500 to-pink-500' }
 ];
 
 export default function About() {
@@ -47,18 +50,17 @@ export default function About() {
     <section
       id="about"
       className="min-h-screen py-20 px-6 text-white relative overflow-hidden"
-      style={{ 
+      style={{
         background: 'linear-gradient(to right, #0d0d0d, #1a2b5a)',
       }}
     >
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Hero Section */}
-        <div 
+        <div
           id="hero-section"
           data-animate
-          className={`flex flex-col lg:flex-row items-center gap-16 mb-32 transition-all duration-1000 ${
-            isVisible['hero-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`flex flex-col lg:flex-row items-center gap-16 mb-32 transition-all duration-1000 ${isVisible['hero-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
           <div className="lg:w-3/5 space-y-8">
             <div className="relative">
@@ -66,12 +68,12 @@ export default function About() {
                 Hi There
               </h2>
             </div>
-            
+
             <div className="space-y-6 text-xl leading-relaxed">
               <p>
                 I'm <span className="text-blue-400 font-semibold">Chetan</span>, currently pursuing my B.Tech in Computer Science with a specialization in AI & ML.
               </p>
-              
+
               <p>
                 I'm passionate about technology, creative problem-solving, and designing intuitive digital experiences.
                 I enjoy turning ideas into real, usable products and love collaborating with others to make things better.
@@ -80,7 +82,7 @@ export default function About() {
                   here <FaArrowRight className="text-sm" />
                 </a>, where I've shared a few projects I'm proud of.
               </p>
-              
+
               <p>
                 Outside of tech, I like exploring art and design, playing around with creative tools like Photoshop,
                 diving into new hobbies, and meeting interesting people, sketching and gaming.
@@ -108,12 +110,11 @@ export default function About() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mb-16" />
 
         {/* Certifications Section */}
-        <div 
+        <div
           id="certs-section"
           data-animate
-          className={`mb-32 transition-all duration-1000 delay-400 ${
-            isVisible['certs-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`mb-32 transition-all duration-1000 delay-400 ${isVisible['certs-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
           <div className="text-center mb-16">
             <h3 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
@@ -160,9 +161,8 @@ export default function About() {
                   {certifications.map((_, idx) => (
                     <div
                       key={idx}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        idx === currentCertIndex ? 'bg-blue-500' : 'bg-gray-600'
-                      }`}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === currentCertIndex ? 'bg-blue-500' : 'bg-gray-600'
+                        }`}
                     />
                   ))}
                 </div>
@@ -174,12 +174,11 @@ export default function About() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mb-16" />
 
         {/* Resume Section */}
-        <div 
+        <div
           id="resume-section"
           data-animate
-          className={`text-center transition-all duration-1000 delay-600 ${
-            isVisible['resume-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+          className={`text-center transition-all duration-1000 delay-600 ${isVisible['resume-section'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
         >
           <h3 className="text-4xl font-bold mb-6 text-blue-400">
             Want to Know More?
@@ -187,13 +186,14 @@ export default function About() {
           <p className="text-lg mb-6 text-gray-300">
             Here's my resume if you'd like a deeper look at my experience and skills.
           </p>
-          
+
           <a
             href={process.env.PUBLIC_URL + '/assets/resume.pdf'}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-all"
           >
-            <FaDownload className="mr-2" /> 
+            <FaDownload className="mr-2" />
             Check it Out
           </a>
         </div><br></br><br></br>
