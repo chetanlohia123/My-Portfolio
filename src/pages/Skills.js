@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  SiJavascript, SiPython, SiC, SiHtml5, SiReact, SiTailwindcss, SiGithub, SiNodedotjs,
+  SiJavascript, SiAdobeillustrator, SiCplusplus, SiPython, SiC, SiHtml5, SiReact, SiTailwindcss, SiGithub, SiNodedotjs,
   SiAdobephotoshop, SiFigma,
   SiCanva, SiGooglechrome,
   SiSqlite,
 } from 'react-icons/si';
-import { FaLaptopCode, FaUsers, FaComments, FaClock, FaLightbulb, FaProjectDiagram, FaCode, FaTerminal, FaBug, FaList, FaTh, FaExternalLinkAlt, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa';
+import { FaLaptopCode, FaJava, FaUsers, FaComments, FaClock, FaLightbulb, FaProjectDiagram, FaCode, FaTerminal, FaBug, FaList, FaTh, FaExternalLinkAlt, FaChevronDown, FaChevronUp, FaChevronRight, FaUserTie } from 'react-icons/fa';
 
 const skillCategories = [
   {
@@ -20,27 +20,47 @@ const skillCategories = [
         level: 'Advanced',
         progress: 85,
         description: "Proficient in system programming, data structures, and algorithm implementation using C.",
-        experience: "3+ years",
-        projects: ["Memory Management System", "Custom Data Structures Library"]
+        experience: "5+ years",
+        projects: ["Drug Management System", "Parking Management System"] // Add your actual C projects
+      },
+      {
+        name: "C++",
+        icon: <SiCplusplus />, // You'll need to import this: import { SiCplusplus } from "react-icons/si";
+        color: '#00599C',
+        level: 'Advanced', // Adjust based on your level
+        progress: 70, // Adjust based on your proficiency (0-100)
+        description: "System programming, data structures, algorithms, and competitive programming.",
+        experience: "4+ years", // Adjust based on your experience
+        projects: ["Algorithm Implementation", "System Programming"] // Add your actual C++ projects
+      },
+      {
+        name: "Java",
+        icon: <FaJava />, // You'll need to import this: import { FaJava } from "react-icons/fa";
+        color: '#ED8B00',
+        level: 'Intermediate', // Adjust based on your level
+        progress: 75, // Adjust based on your proficiency (0-100)
+        description: "Object-oriented programming, Spring framework, and enterprise application development.",
+        experience: "2+ years", // Adjust based on your experience
+        projects: ["Web Application Backend", "Desktop GUI Application"] // Add your actual Java projects
       },
       {
         name: "Python",
         icon: <SiPython />,
         color: '#3776AB',
-        level: 'Advanced',
+        level: 'Intermediate',
         progress: 90,
         description: "Experienced in web development, data analysis, machine learning, and automation.",
-        experience: "4+ years",
-        projects: ["AI Chatbot", "Data Analytics Dashboard", "Web Scraper"]
+        experience: "3+ years",
+        projects: ["AI Chatbot", "Basic Programming"]
       },
       {
         name: "JavaScript",
         icon: <SiJavascript />,
         color: '#F7DF1E',
-        level: 'Advanced',
+        level: 'Intermediate',
         progress: 88,
         description: "Expert in modern ES6+, async programming, and full-stack development.",
-        experience: "3+ years",
+        experience: "4+ years",
         projects: ["E-commerce Platform", "Real-time Chat App", "Task Management Tool"]
       },
       {
@@ -70,17 +90,17 @@ const skillCategories = [
         level: 'Expert',
         progress: 95,
         description: "Semantic HTML5, CSS3, animations, and responsive design principles.",
-        experience: "5+ years",
+        experience: "8+ years",
         projects: ["Corporate Website", "Landing Pages", "CSS Animation Library"]
       },
       {
         name: "Git & GitHub",
         icon: <SiGithub />,
         color: '#181717',
-        level: 'Advanced',
+        level: 'Beginner',
         progress: 82,
         description: "Version control, collaboration workflows, and CI/CD pipelines.",
-        experience: "3+ years",
+        experience: "2+ years",
         projects: ["Open Source Contributions", "Team Collaboration Projects"]
       },
       {
@@ -97,10 +117,10 @@ const skillCategories = [
         name: "SQL",
         icon: <SiSqlite />,
         color: '#003B57',
-        level: 'Intermediate',
+        level: 'Advanced',
         progress: 70,
         description: "Database design, complex queries, and performance optimization.",
-        experience: "2+ years",
+        experience: "5+ years",
         projects: ["Database Management System", "Analytics Queries", "Data Migration Scripts"]
       },
       {
@@ -110,7 +130,7 @@ const skillCategories = [
         level: 'Advanced',
         progress: 80,
         description: "Problem-solving with efficient algorithms and optimal data structures.",
-        experience: "3+ years",
+        experience: "2+ years",
         projects: ["Algorithm Visualizer", "Competitive Programming Solutions"]
       },
       {
@@ -120,7 +140,7 @@ const skillCategories = [
         level: 'Advanced',
         progress: 85,
         description: "Design patterns, inheritance, polymorphism, and clean code practices.",
-        experience: "3+ years",
+        experience: "2+ years",
         projects: ["Class Library Design", "Software Architecture Projects"]
       },
       {
@@ -140,7 +160,7 @@ const skillCategories = [
         level: 'Advanced',
         progress: 90,
         description: "Mobile-first design, cross-browser compatibility, and performance optimization.",
-        experience: "3+ years",
+        experience: "4+ years",
         projects: ["Mobile-First Websites", "Progressive Web Apps"]
       },
     ]
@@ -161,6 +181,16 @@ const skillCategories = [
         projects: ["Brand Identity Design", "Social Media Graphics", "Web Assets"]
       },
       {
+        name: "Adobe Illustrator",
+        icon: <SiAdobeillustrator />,
+        color: '#FF9A00',
+        level: 'Intermediate',
+        progress: 75,
+        description: "Vector graphics, logo design, and scalable illustrations.",
+        experience: "3+ years",
+        projects: ["Logo Design", "Icon Sets", "Vector Illustrations"]
+      },
+      {
         name: "Figma",
         icon: <SiFigma />,
         color: '#F24E1E',
@@ -171,10 +201,20 @@ const skillCategories = [
         projects: ["Mobile App Mockups", "Design Systems", "Interactive Prototypes"]
       },
       {
+        name: "Canva",
+        icon: <SiCanva />,
+        color: '#00C4CC',
+        level: 'Expert',
+        progress: 88,
+        description: "Quick graphic design, social media content, and presentation design.",
+        experience: "3+ years",
+        projects: ["Social Media Campaigns", "Marketing Materials", "Presentation Design"]
+      },
+      {
         name: "UI/UX Design",
         icon: <FaLightbulb />,
         color: '#FFD93D',
-        level: 'Intermediate',
+        level: 'Advanced',
         progress: 75,
         description: "User research, wireframing, and creating intuitive user experiences.",
         experience: "2+ years",
@@ -184,20 +224,20 @@ const skillCategories = [
         name: "Design Thinking",
         icon: <FaComments />,
         color: '#9013FE',
-        level: 'Intermediate',
+        level: 'Advanced',
         progress: 70,
         description: "Human-centered design approach and creative problem-solving methodology.",
-        experience: "1+ years",
+        experience: "2+ years",
         projects: ["Design Workshop Facilitation", "User Journey Mapping"]
       },
       {
         name: "Color Theory",
         icon: <FaLightbulb />,
         color: '#FF4081',
-        level: 'Beginner',
+        level: 'Expert',
         progress: 60,
         description: "Understanding color psychology and creating harmonious color palettes.",
-        experience: "1+ years",
+        experience: "5+ years",
         projects: ["Brand Color Schemes", "Accessibility Color Testing"]
       },
     ]
@@ -220,17 +260,17 @@ const skillCategories = [
           />
         ),
         color: '#007ACC',
-        level: 'Advanced',
+        level: 'Expert',
         progress: 88,
         description: "Quick graphic design for social media, presentations, and marketing materials.",
-        experience: "3+ years",
+        experience: "6+ years",
         projects: ["Social Media Campaigns", "Presentation Templates", "Marketing Materials"]
       },
       {
         name: "Canva",
         icon: <SiCanva />,
         color: '#00C4CC',
-        level: 'Advanced',
+        level: 'Expert',
         progress: 88,
         description: "Quick graphic design for social media, presentations, and marketing materials.",
         experience: "3+ years",
@@ -240,10 +280,10 @@ const skillCategories = [
         name: "GitHub",
         icon: <SiGithub />,
         color: '#181717',
-        level: 'Advanced',
+        level: 'Intermediate',
         progress: 85,
         description: "Code collaboration, project management, and open-source contributions.",
-        experience: "3+ years",
+        experience: "2+ years",
         projects: ["Open Source Contributions", "Team Repository Management"]
       },
       {
@@ -260,10 +300,10 @@ const skillCategories = [
         name: "Chrome DevTools",
         icon: <SiGooglechrome />,
         color: '#4285F4',
-        level: 'Advanced',
+        level: 'Beginner',
         progress: 80,
         description: "Debugging, performance analysis, and web development optimization.",
-        experience: "3+ years",
+        experience: "1+ years",
         projects: ["Performance Optimization", "Responsive Design Testing", "JavaScript Debugging"]
       },
     ]
@@ -285,22 +325,22 @@ const skillCategories = [
       },
       {
         name: "Leadership",
-        icon: <FaUsers />,
+        icon: <FaUserTie />,
         color: '#3F51B5',
         level: 'Advanced',
         progress: 82,
         description: "Team guidance, project coordination, and mentoring junior developers.",
-        experience: "2+ years",
+        experience: "3+ years",
         projects: ["Team Lead Experience", "Mentorship Programs", "Project Management"]
       },
       {
         name: "Team Collaboration",
         icon: <FaUsers />,
         color: '#00BCD4',
-        level: 'Expert',
+        level: 'Advanced',
         progress: 92,
         description: "Effective communication and seamless cooperation in diverse team environments.",
-        experience: "4+ years",
+        experience: "5+ years",
         projects: ["Cross-functional Teams", "Remote Collaboration", "Agile Development"]
       },
       {
@@ -310,14 +350,14 @@ const skillCategories = [
         level: 'Advanced',
         progress: 85,
         description: "Clear technical communication and presentation of complex ideas.",
-        experience: "3+ years",
+        experience: "5+ years",
         projects: ["Technical Presentations", "Documentation Writing", "Client Communication"]
       },
       {
         name: "Adaptability",
         icon: <FaClock />,
         color: '#FF9800',
-        level: 'Expert',
+        level: 'Advanced',
         progress: 90,
         description: "Quick learning of new technologies and adaptation to changing requirements.",
         experience: "4+ years",
@@ -330,7 +370,7 @@ const skillCategories = [
         level: 'Advanced',
         progress: 88,
         description: "Analytical evaluation and systematic approach to problem-solving.",
-        experience: "3+ years",
+        experience: "4+ years",
         projects: ["System Analysis", "Requirements Gathering", "Solution Architecture"]
       },
       {
@@ -360,17 +400,17 @@ const skillCategories = [
         level: 'Expert',
         progress: 90,
         description: "Innovative thinking and creative approaches to design and development challenges.",
-        experience: "4+ years",
+        experience: "8+ years",
         projects: ["Creative Solutions", "Innovation Projects", "Design Concepts"]
       },
       {
         name: "Attention to Detail",
         icon: <FaLightbulb />,
         color: '#FF5722',
-        level: 'Advanced',
+        level: 'Expert',
         progress: 88,
         description: "Meticulous code review and quality assurance in all deliverables.",
-        experience: "3+ years",
+        experience: "8+ years",
         projects: ["Code Reviews", "Quality Assurance", "Documentation Standards"]
       },
     ]
@@ -392,7 +432,7 @@ export default function Skills() {
   const [isMobile, setIsMobile] = useState(false);
   const [expandedCategory, setExpandedCategory] = useState(null);
   const [expandedSkill, setExpandedSkill] = useState(null);
-const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); // ADD THIS LINE
+  const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); // ADD THIS LINE
 
   useEffect(() => {
     setIsVisible(true);
@@ -798,8 +838,8 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
                     <button
                       onClick={() => setViewMode('grid')}
                       className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'grid'
-                          ? 'bg-blue-600 text-white shadow-md'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
+                        ? 'bg-blue-600 text-white shadow-md'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
                         }`}
                       title="Grid View"
                     >
@@ -808,8 +848,8 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
                     <button
                       onClick={() => setViewMode('list')}
                       className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'list'
-                          ? 'bg-blue-600 text-white shadow-md'
-                          : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
+                        ? 'bg-blue-600 text-white shadow-md'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-600/30'
                         }`}
                       title="List View"
                     >
@@ -863,9 +903,9 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
         {isMobile && (
           <div className={`mb-8 transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="bg-gray-800/60 backdrop-blur-md rounded-xl border border-blue-300/20 shadow-xl overflow-hidden">
-              
+
               {/* Filter Header with Toggle Button */}
-              <div 
+              <div
                 onClick={() => setIsMobileFiltersExpanded(!isMobileFiltersExpanded)}
                 className="p-4 cursor-pointer transition-all duration-300 hover:bg-gray-700/30"
               >
@@ -887,7 +927,7 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
                   <div className="flex items-center gap-3">
                     {/* Filter Count */}
                     <div className="text-xs text-gray-400">
-                      {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                      {(selectedLevel !== 'All' || selectedCategory !== 'All')
                         ? `${filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)} skills`
                         : `${totalSkills} skills`
                       }
@@ -901,11 +941,10 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
               </div>
 
               {/* Collapsible Filter Content */}
-              <div className={`transition-all duration-500 ease-in-out ${
-                isMobileFiltersExpanded 
-                  ? 'max-h-96 opacity-100' 
+              <div className={`transition-all duration-500 ease-in-out ${isMobileFiltersExpanded
+                  ? 'max-h-96 opacity-100'
                   : 'max-h-0 opacity-0'
-              } overflow-hidden`}>
+                } overflow-hidden`}>
                 <div className="px-4 pb-4 space-y-4 border-t border-gray-600/30">
                   {/* Level Filter */}
                   <div className="pt-4">
@@ -942,7 +981,7 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
                   <div className="grid grid-cols-2 gap-4 pt-2">
                     <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-3 py-2 border border-blue-300/20 text-center">
                       <div className="text-lg font-bold text-blue-400">
-                        {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All')
                           ? filteredCategories.reduce((total, cat) => total + cat.skills.length, 0)
                           : totalSkills
                         }
@@ -953,7 +992,7 @@ const [isMobileFiltersExpanded, setIsMobileFiltersExpanded] = useState(false); /
                     </div>
                     <div className="bg-gray-700/40 backdrop-blur-md rounded-xl px-3 py-2 border border-blue-300/20 text-center">
                       <div className="text-lg font-bold text-blue-400">
-                        {(selectedLevel !== 'All' || selectedCategory !== 'All') 
+                        {(selectedLevel !== 'All' || selectedCategory !== 'All')
                           ? filteredCategories.length
                           : skillCategories.length
                         }
