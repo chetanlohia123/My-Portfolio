@@ -136,7 +136,7 @@ export default function About() {
                     <img
                       src={cert.src}
                       alt={cert.title}
-                      className="h-[400px] w-auto rounded-lg object-contain transform group-hover:scale-105 transition-transform duration-300"
+                      className="h-[420px] w-auto rounded-lg object-contain transform group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 </div>
@@ -153,7 +153,7 @@ export default function About() {
                   key={currentCertIndex}
                   src={certifications[currentCertIndex].src}
                   alt={certifications[currentCertIndex].title}
-                  className="h-[300px] w-auto rounded-lg object-contain transform group-hover:scale-105 transition-all duration-500 animate-slide-in"
+                  className="h-[320px] w-auto rounded-lg object-contain transform group-hover:scale-105 transition-all duration-500 animate-slide-in"
                 />
               </div>
               <div className="text-center mt-4">
@@ -213,7 +213,7 @@ export default function About() {
         }
         
         .animate-scroll-x {
-          animation: scroll-x 20s linear infinite;
+          animation: scroll-x 28s linear infinite;
         }
         
         .animate-slide-in {
